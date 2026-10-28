@@ -1,0 +1,67 @@
+name: Générer le PDF du rapport
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Dossier_projet_gestion_administrative_scolaire_FINAL.html'
+      - 'build_dossier.py'
+      - 'paginate.py'
+      - 'render_pdf.py'
+      - 'dossier.css'
+      - 'captures/**'
+      - 'diagrammes/**'
+      - '.github/workflows/render-report-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rapport-pdf-main
+  cancel-in-progress: false
+
+jobs:
+  render-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt du rapport
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Récupérer le dépôt applicatif pour recalculer les indicateurs
+        uses: actions/checkout@v4
+        with:
+          repository: darlyblake/Syst-me-Administratif-Scolaire
+          path: Syst-me-Administratif-Scolaire
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer les bibliothèques système du moteur PDF
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcairo2 libpango-1.0-0 libgdk-pixbuf-2.0-0 libffi-dev shared-mime-info
+
+      - name: Installer les dépendances Python
+        run: python -m pip install --upgrade pip weasyprint pypdf
+
+      - name: Générer le rapport HTML et PDF
+        env:
+          SAS_REPO_PATH: ${{ github.workspace }}/Syst-me-Administratif-Scolaire
+        run: python paginate.py
+
+      - name: Enregistrer le PDF mis à jour dans main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Dossier_projet_gestion_administrative_scolaire_FINAL.pdf pages.json
+          if git diff --cached --quiet; then
+            echo "Le PDF et la pagination sont déjà à jour."
+          else
+            git commit -m "Générer le PDF actualisé du rapport"
+            git push origin HEAD:main
+          fi
