@@ -7,7 +7,7 @@ import json, os, re, sys, glob, html
 from collections import OrderedDict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = "/home/claude/darlyblake/syst-me-administratif-scolaire"
+REPO = os.environ.get("SAS_REPO_PATH", os.path.abspath(os.path.join(HERE, "../Syst-me-Administratif-Scolaire")))
 OUT = os.path.join(HERE, "Dossier_projet_gestion_administrative_scolaire_FINAL.html")
 PAGES = {}
 if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
@@ -491,7 +491,7 @@ def contenu():
     o.append("<ul class='refs'>" + "".join(f"<li>{a}. <em>{c}</em>. {b}. <a href='{u}'>{u}</a> (consulté le 14 octobre 2026).</li>" for a, b, c, u in refs) + "</ul>")
     o.append(h3("Documents internes consultés"))
     o.append(ul([
-        "Dépôt GitHub du projet, branche <code>main</code>, dernier commit du 12 octobre 2026 : <a href=\"https://github.com/darlyblake/Syst-me-Administratif-Scolaire\">github.com/darlyblake/Syst-me-Administratif-Scolaire</a>.",
+        "Dépôt GitHub du projet, branche <code>main</code>, version consultée au 17 octobre 2026 : <a href=\"https://github.com/darlyblake/Syst-me-Administratif-Scolaire\">github.com/darlyblake/Syst-me-Administratif-Scolaire</a>.",
         "Application déployée : <a href=\"https://syst-me-administratif-scolaire.vercel.app/\">syst-me-administratif-scolaire.vercel.app</a> (consultée le 14 octobre 2026).",
         "<code>README.md</code>, <code>AGENTS.md</code>, <code>docs/ARCHITECTURE.md</code>, <code>docs/ROADMAP.md</code>, <code>docs/ARCHITECTURE-MODULES.md</code>, <code>docs/INTERFACE-UI-UX.md</code>.",
         "<code>IMPLEMENTATION-ECOLE.md</code>, <code>POINTAGE-IMPLEMENTATION.md</code>, <code>PARENT-TODO.md</code>, <code>TODO.md</code>, <code>AUDIT_SETTINGS.md</code>.",
