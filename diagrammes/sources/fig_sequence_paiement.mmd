@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor A as Agent autorisé
+    participant UI as Interface de paiement
+    participant S as Service finance
+    participant R as RPC create_payment_with_allocations
+    participant T as Tables payments, payment_allocations
+    participant V as RPC get_payment_summary
+
+    A->>UI: Choisit l'élève et l'inscription
+    UI->>S: Charge l'échéancier
+    A->>UI: Saisit le montant et l'échéance visée
+    UI->>S: Demande d'enregistrement
+    S->>R: p_enrollment_id, p_amount, p_allocations
+    Note over R: Une seule fonction SQL, donc une seule transaction
+    R->>R: Vérifie la session et le rôle (owner, admin, director, accountant)
+    R->>R: Montant positif, total des affectations égal au montant, une seule échéance
+    R->>R: Échéance non soldée, ordre séquentiel respecté
+    alt Une règle est violée
+        R-->>S: Exception avec message
+        S-->>UI: Erreur affichée, rien n'est enregistré
+    else Contrôles réussis
+        R->>T: Insère le paiement puis l'affectation
+        R-->>S: Identifiant du paiement
+        S->>V: Recalcule le résumé
+        V-->>UI: Solde mis à jour
+        UI-->>A: Confirmation
+    end
+    Note over A,V: Scénario de test non exécuté : versement partiel sur la première échéance, puis contrôle du solde.

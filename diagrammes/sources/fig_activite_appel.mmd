@@ -1,0 +1,22 @@
+flowchart TB
+    subgraph ENS [Appel des élèves]
+    A([Début]) --> B[Enseignant ou personnel autorisé choisit la classe et la séance]
+    B --> C[Liste des élèves affichée]
+    C --> D[Saisie présent, absent ou en retard]
+    D --> E[Validation]
+    E --> F[[RPC record_attendance ou record_lesson_attendance]]
+    F --> G[Historiques et statistiques mis à jour]
+    end
+    subgraph PAR [Justificatif]
+    H([Parent]) --> I[Signale l'absence et dépose un justificatif]
+    I --> J[[RPC request_attendance_justification]]
+    J --> K[Demande en attente]
+    K --> L[Revue par un membre du personnel]
+    L --> M{Décision}
+    M -- Acceptée --> N[État de l'absence mis à jour]
+    M -- Refusée --> O[Demande refusée]
+    N --> P[[RPC review_attendance_justification]]
+    O --> P
+    end
+    G -.-> K
+    Z[Le registre d'appel des élèves est distinct du pointage du personnel enseignant]

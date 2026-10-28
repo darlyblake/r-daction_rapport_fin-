@@ -1,0 +1,16 @@
+sequenceDiagram
+    autonumber
+    actor S as Personnel autorisé
+    participant UI as Interface de pointage
+    participant R as RPC pointage_*
+    participant T as Tables lesson_attendance, alerts
+
+    Note over S,T: Clôture administrative et alertes
+    S->>UI: Ouvre les alertes du jour
+    UI->>R: pointage_refresh_alerts, pointage_get_alerts
+    R->>T: Alertes générées à partir de l'emploi du temps
+    S->>UI: Clôture un cours non terminé, avec un motif
+    UI->>R: pointage_close_lesson_admin
+    R->>R: Droit attendance.manage, cours en cours ou programmé
+    R->>T: Fin enregistrée par l'administration
+    R-->>UI: Confirmation

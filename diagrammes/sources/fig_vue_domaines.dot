@@ -1,0 +1,26 @@
+digraph DOM {
+  graph [rankdir=TB, fontname="DejaVu Sans", bgcolor="white", nodesep=0.35, ranksep=0.65, pad=0.25, splines=true, newrank=true];
+  node  [shape=box, style="rounded", fontname="DejaVu Sans", fontsize=10.5, color="#1f3a5f", fontcolor="#111111", margin="0.14,0.1"];
+  edge  [color="#1f3a5f", arrowsize=0.8, fontname="DejaVu Sans", fontsize=9, fontcolor="#44505f"];
+
+  fam  [label=<<B>Familles et financement tiers</B><BR/><FONT POINT-SIZE="9">school_families, student_family_members,<BR/>family_discount_rules, sponsoring_organizations,<BR/>organization_coverage_rules, *_snapshots</FONT>>];
+  fin  [label=<<B>Finance scolaire</B><BR/><FONT POINT-SIZE="9">tuition_plans, payment_schedules, payments,<BR/>payment_allocations, student_options,<BR/>establishment_fee_settings</FONT>>];
+  str  [label=<<B>Structure scolaire</B><BR/><FONT POINT-SIZE="9">academic_years, education_cycles, grade_levels, school_classes,<BR/>subjects, timetable_slots, teachers, students,<BR/>student_guardians, enrollments, student_transfer_requests</FONT>>];
+  vie  [label=<<B>Vie scolaire</B><BR/><FONT POINT-SIZE="9">attendance_records,<BR/>attendance_justification_requests,<BR/>assessments, grades, academic_grade_periods,<BR/>teacher_lesson_entries, teacher_homework</FONT>>];
+  com  [label=<<B>Communication et documents</B><BR/><FONT POINT-SIZE="9">notifications, conversations, messages,<BR/>school_events, documents,<BR/>school_document_requests,<BR/>parent_document_requests,<BR/>parent_document_publications</FONT>>];
+  per  [label=<<B>Personnel, pointage et paie</B><BR/><FONT POINT-SIZE="9">staff_members, staff_attendance,<BR/>pointage_settings, pointage_access_codes,<BR/>pointage_alerts, teacher_lesson_attendance,<BR/>payroll_periods, payroll_entries</FONT>>];
+  acc  [label=<<B>Établissement et accès</B><BR/><FONT POINT-SIZE="9">establishments, establishment_members, establishment_roles,<BR/>platform_admins, establishment_subscriptions, audit_logs</FONT>>, color="#5a6675"];
+
+  { rank=same; fam; fin; }
+  { rank=same; vie; com; per; }
+
+  fam -> fin [label=" échéances"];
+  fam -> str [label=" élèves, inscriptions"];
+  fin -> str [label=" inscription", style=dashed];
+  str -> vie [dir=back, label=" classes, matières"];
+  str -> com [dir=back, label=" élèves"];
+  str -> per [dir=back, label=" emploi du temps"];
+  vie -> acc [style=invis]; com -> acc [style=invis]; per -> acc [style=invis];
+  note [shape=plaintext, label=<<I>Toutes les tables métier portent une colonne establishment_id qui référence establishments<BR/>(isolation par établissement). Trait pointillé : relation observée dans les requêtes SQL, contrainte non visible dans le dépôt.</I>>, fontsize=9.5, fontcolor="#44505f"];
+  acc -> note [style=invis];
+}

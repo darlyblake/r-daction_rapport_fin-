@@ -1,0 +1,39 @@
+digraph INS {
+  graph [rankdir=TB, fontname="DejaVu Sans", bgcolor="white", nodesep=0.18, ranksep=0.36, pad=0.2, splines=ortho, newrank=true, compound=true];
+  node  [shape=box, style="rounded,filled", fillcolor="#eef1f5", fontname="DejaVu Sans", fontsize=11, color="#1f3a5f", fontcolor="#111111", margin="0.12,0.07", width=1.8];
+  edge  [color="#1f3a5f", arrowsize=0.7, fontname="DejaVu Sans", fontsize=10, fontcolor="#44505f"];
+
+  subgraph cluster_1 { label="1. Identification de l'élève"; labeljust=l; fontsize=12; fontcolor="#1f3a5f"; color="#9aa6b5"; style="rounded";
+    A [label="Début", shape=ellipse, width=1.2];
+    B [label="Rechercher un dossier\nexistant"];
+    C [label="Dossier\ntrouvé ?", shape=diamond, width=1.9, height=0.9];
+    D [label="Sélectionner l'élève"];
+    E [label="Saisir l'identité\ndu nouvel élève"];
+  }
+  subgraph cluster_2 { label="2. Inscription, frais et prise en charge"; labeljust=l; fontsize=12; fontcolor="#1f3a5f"; color="#9aa6b5"; style="rounded";
+    F [label="Choisir l'année,\nla classe et le plan\nde frais"];
+    G [label="Choisir les options\nfacultatives"];
+    H [label="Frère ou sœur,\norganisme payeur,\nélève de l'État,\nexonération ?", shape=diamond, width=2.2, height=1.0];
+    I [label="Inscription seule,\npaiements saisis\ndans Finance"];
+    J [label="Paiement immédiat\n(facultatif)"];
+    K [label="Valider le formulaire"];
+  }
+  subgraph cluster_3 { label="3. Enregistrement côté base"; labeljust=l; fontsize=12; fontcolor="#1f3a5f"; color="#9aa6b5"; style="rounded";
+    L [label="Fonction d'inscription\n(transaction unique)"];
+    M [label="Contrôles\nserveur", shape=diamond, width=1.9, height=0.9];
+    N [label="Erreur : permission,\nprise en charge,\norganisme, élève associé", shape=parallelogram, width=2.0];
+    O [label="Création de l'élève,\nde l'inscription et\nde l'échéancier"];
+    P [label="Réduction familiale ou\nprise en charge,\nreste à payer"];
+    Q [label="Confirmation :\nélève, inscription,\néchéancier, résumé", shape=parallelogram, width=2.0];
+    R [label="Fin", shape=ellipse, width=1.2];
+  }
+  { rank=same; A; F; L; }
+  A -> B; B -> C; C -> D [xlabel="Oui "]; C -> E [xlabel="Non "];
+  D -> F; E -> F;
+  F -> G; G -> H; H -> I [xlabel="Oui "]; H -> J [xlabel="Non "];
+  I -> K; J -> K;
+  K -> L;
+  L -> M; M -> N [xlabel="Refus "]; M -> O [xlabel="Acceptés "];
+  N -> K [constraint=false, style=dashed];
+  O -> P; P -> Q; Q -> R;
+}

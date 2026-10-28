@@ -1,0 +1,34 @@
+sequenceDiagram
+    autonumber
+    actor U as Utilisateur
+    participant UI as Page de connexion
+    participant P as Fournisseur d'authentification (React)
+    participant SA as Supabase Auth
+    participant DB as RPC get_my_auth_context
+    participant G as PermissionRoute (navigateur)
+
+    U->>UI: Saisit e-mail et mot de passe
+    UI->>P: connecter()
+    P->>SA: signInWithPassword
+    alt Identifiants invalides
+        SA-->>UI: Erreur affichée
+    else Session créée
+        SA-->>P: Session (jeton)
+        P->>DB: Demande le contexte du compte
+        DB-->>P: Type de compte, établissements, rôle
+        alt Compte sans contexte
+            P->>SA: signOut
+            P-->>UI: Compte non configuré
+        else Contexte valide
+            P-->>UI: Redirection selon le type de compte
+        end
+    end
+    U->>G: Ouvre une page /ecole/...
+    G->>G: Permission de la route comparée aux droits du rôle
+    alt Permission accordée
+        G-->>U: Affiche la page
+    else Permission refusée
+        G-->>U: Redirection vers le tableau de bord
+    end
+    Note over UI,P: platform_admin vers /admin, parent vers /parents/tableau-de-bord, teacher vers /enseignant, school_member vers /etablissement
+    Note over G,DB: Aucun middleware Next.js dans la branche main. Les données sont protégées par les RPC et les règles RLS de la base.

@@ -1,0 +1,36 @@
+digraph ARCH {
+  graph [rankdir=TB, fontname="DejaVu Sans", bgcolor="white", nodesep=0.35, ranksep=0.5, pad=0.25, splines=ortho, compound=true, newrank=true];
+  node  [shape=box, style="rounded", fontname="DejaVu Sans", fontsize=11, color="#1f3a5f", fontcolor="#111111", margin="0.14,0.08"];
+  edge  [color="#1f3a5f", arrowsize=0.8, fontname="DejaVu Sans", fontsize=9, fontcolor="#44505f"];
+
+  subgraph cluster_u { label="1. Utilisateurs"; labeljust=l; fontsize=11; fontcolor="#1f3a5f"; color="#9aa6b5"; style="rounded";
+    u1 [label="Administration\nde la plateforme"]; u2 [label="Personnel\nd'établissement"]; u3 [label="Enseignants"]; u4 [label="Parents"]; }
+
+  subgraph cluster_n { label="2. Navigateur web"; labeljust=l; fontsize=11; fontcolor="#1f3a5f"; color="#9aa6b5"; style="rounded";
+    nav [label="Interface responsive\n(manifeste et service worker présents)", width=5]; 
+    emb [label="Capacitor / Electron\n(préparation, non livré)", style="rounded,dashed", color="#5a6675", fontcolor="#5a6675"]; }
+
+  subgraph cluster_app { label="3. Application Next.js 15 · React 18 · TypeScript · Tailwind CSS 4"; labeljust=l; fontsize=11; fontcolor="#1f3a5f"; color="#1f3a5f"; style="rounded";
+    p [label="Pages et routes\n/admin · /ecole · /enseignant · /parents"]; 
+    c [label="Composants UI\n(Radix UI, React Hook Form, Zod)"]; 
+    g [label="PermissionRoute\n(contrôle de route côté navigateur)"];
+    h [label="4. Hooks de domaine\n(hooks/)"]; }
+
+  subgraph cluster_s { label="5. Services de données"; labeljust=l; fontsize=11; fontcolor="#1f3a5f"; color="#9aa6b5"; style="rounded";
+    s1 [label="lib/supabase/services\n(modules connectés à Supabase)"]; 
+    s2 [label="services/*.service.ts\n(33 services utilisent localStorage)"]; }
+
+  subgraph cluster_d { label="6. Sources de données selon le module"; labeljust=r; fontsize=11; fontcolor="#1f3a5f"; color="#9aa6b5"; style="rounded";
+    ls [label="localStorage\n(navigateur)", shape=cylinder, style=""];
+    sb [label="Supabase (accès HTTPS)\nAuth · PostgreSQL (RPC, RLS)\nStorage · Edge Functions", shape=cylinder, style=""]; }
+
+  gh [label="7. Dépôt GitHub\nbranche main\n(déclenche le déploiement)"]; vc [label="Vercel\nconstruction et hébergement\nde l'application déployée\n(tâche planifiée quotidienne)"];
+
+  u1 -> nav; u2 -> nav; u3 -> nav; u4 -> nav;
+  nav -> p; p -> c [dir=both]; p -> g [style=dashed, arrowhead=none]; p -> h; c -> h;
+  h -> s1; h -> s2; s1 -> sb; s2 -> ls;
+  emb -> nav [style=dashed, color="#5a6675", arrowhead=none];
+  gh -> vc [style=dashed, color="#b0441f", fontcolor="#b0441f", penwidth=1.4];
+  vc -> p [style=dashed, color="#b0441f", fontcolor="#b0441f", penwidth=1.4, constraint=false];
+  { rank=same; gh; vc; }
+}

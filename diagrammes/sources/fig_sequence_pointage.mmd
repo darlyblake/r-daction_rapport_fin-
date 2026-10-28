@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    actor E as Enseignant
+    actor S as Personnel autorisé
+    participant UI as Interface de pointage
+    participant R as RPC pointage_*
+    participant T as Tables event_history, lesson_attendance, alerts
+
+    rect rgb(238,241,245)
+    Note over S,T: Arrivée et départ du personnel
+    S->>UI: Choisit arrivée ou départ, saisit le code personnel
+    UI->>R: pointage_record_by_code
+    R->>R: Droit attendance.manage, code vérifié par empreinte
+    R->>T: Enregistre l'événement
+    end
+    rect rgb(238,241,245)
+    Note over E,T: Début de cours par QR temporaire
+    S->>UI: Affiche le QR de l'établissement
+    UI->>R: pointage_create_qr_session
+    E->>UI: Scanne le QR avec son téléphone
+    UI->>R: pointage_start_teacher_course_by_qr
+    R->>R: Identifie l'enseignant, cherche le cours dans l'emploi du temps
+    alt Aucun cours correspondant
+        R-->>UI: Erreur
+    else Cours trouvé
+        R->>T: Crée la séance, heures créditées selon les paramètres
+    end
+    end
+    rect rgb(238,241,245)
+    Note over E,T: Fin de cours
+    E->>UI: Scanne le QR ou clôture depuis son interface
+    UI->>R: pointage_finish_teacher_course_by_qr
+    R->>T: Heure de fin, durée réelle, statut terminé
+    end
+    Note over UI,R: Interface partielle à la date d'audit : écrans reliés aux RPC, parcours non validés de bout en bout, tests non réalisés.

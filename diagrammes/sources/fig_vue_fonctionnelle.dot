@@ -1,0 +1,33 @@
+digraph FUN {
+  graph [rankdir=TB, fontname="DejaVu Sans", bgcolor="white", nodesep=0.22, ranksep=0.7, pad=0.25, splines=true, newrank=true];
+  node  [shape=box, style="rounded", fontname="DejaVu Sans", fontsize=10.5, color="#1f3a5f", fontcolor="#111111", margin="0.14,0.1"];
+  edge  [color="#1f3a5f", arrowsize=0.8, fontname="DejaVu Sans", fontsize=9, fontcolor="#44505f"];
+
+  adm [label=<<B>Administration<BR/>de la plateforme</B><BR/><FONT POINT-SIZE="9">/admin<BR/>établissements, abonnements,<BR/>support</FONT>>];
+  eco [label=<<B>Espace établissement</B><BR/><FONT POINT-SIZE="9">/ecole<BR/>administration, secrétariat,<BR/>comptabilité, direction,<BR/>surveillance</FONT>>];
+  ens [label=<<B>Espace enseignant</B><BR/><FONT POINT-SIZE="9">/enseignant<BR/>classes, appel, notes,<BR/>cahier de textes,<BR/>pointage</FONT>>];
+  par [label=<<B>Espace parent</B><BR/><FONT POINT-SIZE="9">/parents<BR/>enfants, notes, absences,<BR/>paiements,<BR/>documents</FONT>>];
+
+  mod [label=<<B>Modules de l'espace établissement</B><BR/><FONT POINT-SIZE="9">Scolarité (élèves, classes, inscriptions,<BR/>notes, appel) · Finance (frais, paiements,<BR/>familles et organismes, dépenses) ·<BR/>Personnel (pointage, paie) ·<BR/>Communication et documents · Paramètres</FONT>>, color="#5a6675"];
+
+  t1 [label=<<B>Authentification<BR/>et permissions</B>>];
+  t2 [label=<<B>Notifications</B>>];
+  t3 [label=<<B>Documents<BR/>(Storage)</B>>];
+  t4 [label=<<B>Support technique</B>>];
+
+  sb [label=<<B>Supabase</B><BR/><FONT POINT-SIZE="9">PostgreSQL · RPC · RLS · Auth · Storage</FONT>>, shape=cylinder, style=""];
+  ls [label=<<B>localStorage</B><BR/><FONT POINT-SIZE="9">modules encore locaux</FONT>>, shape=cylinder, style=""];
+
+  { rank=same; adm; eco; ens; par; }
+  { rank=same; t1; t2; t3; t4; }
+  { rank=same; sb; ls; }
+
+  eco -> mod [style=dashed, arrowhead=none];
+  adm -> t1; adm -> t4;
+  eco -> t1; eco -> t2; eco -> t3; eco -> t4;
+  ens -> t1; ens -> t3; ens -> t4;
+  par -> t1; par -> t2; par -> t3; par -> t4;
+  t1 -> sb; t2 -> sb; t3 -> sb; t4 -> sb;
+  mod -> ls [style=dashed, label=" modules locaux"];
+  mod -> sb [label=" modules connectés"];
+}

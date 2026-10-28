@@ -1,0 +1,136 @@
+{
+ "heads": [
+  [
+   0,
+   "intro",
+   "Introduction générale"
+  ],
+  [
+   0,
+   "p1",
+   "Première partie — Présentation du projet"
+  ],
+  [
+   1,
+   "c1",
+   "Chapitre 1. Contexte, problématique et objectifs"
+  ],
+  [
+   0,
+   "p2",
+   "Deuxième partie — Analyse et conception"
+  ],
+  [
+   1,
+   "c2",
+   "Chapitre 2. Besoins, règles de gestion et modélisation"
+  ],
+  [
+   0,
+   "p3",
+   "Troisième partie — L'application"
+  ],
+  [
+   1,
+   "c3",
+   "Chapitre 3. Connexion, navigation et espace d'administration"
+  ],
+  [
+   1,
+   "c4",
+   "Chapitre 4. Scolarité : élèves, inscriptions et résultats"
+  ],
+  [
+   1,
+   "c5",
+   "Chapitre 5. Finances : frais, paiements, familles et prises en charge"
+  ],
+  [
+   1,
+   "c6",
+   "Chapitre 6. Enseignants, parents, vie scolaire et pointage"
+  ],
+  [
+   0,
+   "p4",
+   "Quatrième partie — Réalisation technique"
+  ],
+  [
+   1,
+   "c7",
+   "Chapitre 7. Architecture, technologies et sécurité"
+  ],
+  [
+   1,
+   "c8",
+   "Chapitre 8. Tests et validation"
+  ],
+  [
+   0,
+   "p5",
+   "Cinquième partie — Bilan"
+  ],
+  [
+   1,
+   "c9",
+   "Chapitre 9. Résultats, limites et perspectives"
+  ],
+  [
+   0,
+   "concl",
+   "Conclusion générale"
+  ],
+  [
+   0,
+   "refs",
+   "Références"
+  ],
+  [
+   0,
+   "annexes",
+   "Annexes"
+  ]
+ ],
+ "figs": {
+  "domaines": 1,
+  "erd_ins": 2,
+  "erd_fam": 3,
+  "erd_vie": 4,
+  "erd_ens": 5,
+  "erd_poi": 6,
+  "uc": 7,
+  "cap_login": 8,
+  "seq_auth": 9,
+  "cap_dash": 10,
+  "cap_set": 11,
+  "cap_eleve": 12,
+  "act_ins": 13,
+  "cap_insc": 14,
+  "seq_pay": 15,
+  "cap_pay": 16,
+  "cap_fam": 17,
+  "cap_ens": 18,
+  "act_app": 19,
+  "cap_appel": 20,
+  "seq_poi": 21,
+  "seq_ale": 22,
+  "cap_poi": 23,
+  "cap_par": 24,
+  "cap_doc": 25,
+  "archi": 26,
+  "fonc": 27
+ },
+ "tabs": {
+  "roles": 1,
+  "bf": 2,
+  "bnf": 3,
+  "rg": 4,
+  "entites": 5,
+  "tech": 6,
+  "sources": 7,
+  "tests": 8,
+  "anom": 9,
+  "etat": 10,
+  "lim": 11
+ }
+}
