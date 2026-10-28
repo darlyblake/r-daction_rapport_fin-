@@ -34,7 +34,7 @@ Le rapport décrit les fonctions selon trois dimensions : interface présente, r
 - Des fichiers de test et de diagnostic à la racine méritent une revue d'hygiène. Le rapport ne reproduit aucune valeur de mot de passe ou donnée sensible découverte dans ces fichiers.
 
 ## État des livrables
-Le HTML et le script de génération ont été corrigés pour décrire le projet à la première personne, s'appuyer sur les éléments réellement présents et distinguer les tests déjà réalisés des scénarios dont la preuve n'est pas disponible. Le workflow GitHub Actions a généré un nouveau PDF le 28 octobre 2026 (commit `4081787e77d84a09b8ead866509fbe97caba4781`). Le workflow a ensuite été ajusté pour enregistrer ensemble le HTML généré, la pagination et le PDF ; cette dernière exécution doit être confirmée avant la remise finale.
+Le HTML et le script de génération ont été corrigés pour décrire le projet à la première personne, s'appuyer sur les éléments réellement présents et distinguer les tests déjà réalisés des scénarios dont la preuve n'est pas disponible. Le workflow GitHub Actions a généré un nouveau PDF le 28 octobre 2026 (commit `4081787e77d84a09b8ead866509fbe97caba4781`). Le sommaire et les listes du HTML ont ensuite été synchronisés avec la pagination produite (commit `8a9e61baca6b9ea0fb1f1236632150700c320a91`). Le dépôt contient maintenant le HTML corrigé, le PDF régénéré et un workflow qui pourra les synchroniser lors des prochaines modifications. Le rendu PDF a été généré automatiquement ; une relecture visuelle finale reste recommandée avant la remise au jury.
 
 ## Limites conservées
 Voir le chapitre 9 et le tableau « Limites du projet et perspectives » du rapport.
