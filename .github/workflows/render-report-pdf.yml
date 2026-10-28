@@ -58,7 +58,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Dossier_projet_gestion_administrative_scolaire_FINAL.pdf pages.json
+          git add Dossier_projet_gestion_administrative_scolaire_FINAL.html Dossier_projet_gestion_administrative_scolaire_FINAL.pdf pages.json registre.json
           if git diff --cached --quiet; then
             echo "Le PDF et la pagination sont déjà à jour."
           else
