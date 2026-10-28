@@ -1,7 +1,7 @@
 # Rapport de vérification
 
 ## Sources examinées
-Dépôt applicatif `darlyblake/Syst-me-Administratif-Scolaire`, branche `main`, commit `d7905796b35dc7729c08b62c9aee7df39a523ef4), consulté le 28 octobre 2026 : code des pages, hooks, services, composants, fichiers de configuration, tests et 91 fichiers SQL sous `supabase/migrations`. Projet Supabase actif `mogbzexqcatpgfrwzjld) consulté directement pour vérifier le schéma, les politiques RLS, les fonctions SQL, l'historique des migrations et les fonctions Edge déployées. La page de l'application a été consultée lors d'une vérification antérieure le 14 octobre 2026 ; ce constat ne vaut pas contrôle de disponibilité au 28 octobre.
+Dépôt applicatif `darlyblake/Syst-me-Administratif-Scolaire`, branche `main`, commit `d7905796b35dc7729c08b62c9aee7df39a523ef4`, consulté le 28 octobre 2026 : code des pages, hooks, services, composants, fichiers de configuration, tests et 91 fichiers SQL sous `supabase/migrations`. Projet Supabase actif `mogbzexqcatpgfrwzjld` consulté directement pour vérifier le schéma, les politiques RLS, les fonctions SQL, l'historique des migrations et les fonctions Edge déployées. La page de l'application a été consultée lors d'une vérification antérieure le 14 octobre 2026 ; ce constat ne vaut pas contrôle de disponibilité au 28 octobre.
 
 ## État de la base Supabase au relevé du 28 octobre 2026
 - 87 tables de base dans le schéma `public` ; RLS activée sur les 87.
@@ -34,7 +34,7 @@ Le rapport décrit les fonctions selon trois dimensions : interface présente, r
 - Des fichiers de test et de diagnostic à la racine méritent une revue d'hygiène. Le rapport ne reproduit aucune valeur de mot de passe ou donnée sensible découverte dans ces fichiers.
 
 ## État des livrables
-Le HTML et le script de génération ont été corrigés pour décrire le projet à la première personne, s'appuyer sur les éléments réellement présents et distinguer les tests déjà réalisés des scénarios dont la preuve n'est pas disponible. Le PDF présent dans le dépôt n'a pas encore été régénéré à partir du HTML corrigé ; il ne doit donc pas être remis comme s'il correspondait déjà à la nouvelle version. La pagination et le rendu visuel final restent à valider après génération du PDF.
+Le HTML et le script de génération ont été corrigés pour décrire le projet à la première personne, s'appuyer sur les éléments réellement présents et distinguer les tests déjà réalisés des scénarios dont la preuve n'est pas disponible. Le workflow GitHub Actions a généré un nouveau PDF le 28 octobre 2026 (commit `4081787e77d84a09b8ead866509fbe97caba4781`). Le workflow a ensuite été ajusté pour enregistrer ensemble le HTML généré, la pagination et le PDF ; cette dernière exécution doit être confirmée avant la remise finale.
 
 ## Limites conservées
 Voir le chapitre 9 et le tableau « Limites du projet et perspectives » du rapport.
