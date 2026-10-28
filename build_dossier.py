@@ -403,7 +403,7 @@ def contenu():
         ["T15", "Pointage d'arrivée par code", "Code personnel émis", "Saisir le code sur le poste central", "Événement enregistré", "Non rejoué lors de cette revue", "Résultat non consigné pour ce scénario", "<code>pointage_record_by_code</code>"],
         ["T16", "Début de cours par QR", "Cours à l'emploi du temps", "Scanner le QR dans la tolérance", "Séance créée", "Non rejoué lors de cette revue", "Résultat non consigné pour ce scénario", "<code>pointage_start_teacher_course_by_qr</code>"],
         ["T17", "Clôture administrative d'un cours", "Cours non terminé", "Clôturer avec un motif", "Cours clôturé, événement tracé", "Non rejoué lors de cette revue", "Résultat non consigné pour ce scénario", "<code>pointage_close_lesson_admin</code>"],
-        ["T18", "Tests automatisés Jest", "Dépendances installées", "Lancer <code>npm test</code>", "Quatre fichiers de test réussis", "Installation des dépendances impossible dans l'environnement de vérification", "Non testé", "<code>tests/</code>"],
+        ["T18", "Tests automatisés Jest", "Dépendances installées", "Lancer <code>npm test</code>", "Quatre fichiers de test réussis", "Installation des dépendances impossible dans l'environnement de vérification", "Non reproductible ici", "<code>tests/</code>"],
         ["T19", "Disponibilité de la version en ligne", "Aucune", "Requête sur l'adresse déployée", "Page d'accueil renvoyée", "Page d'accueil « NOVA » reçue le 14 octobre 2026 ; connexion non essayée", "Partiel", "Requête HTTP du 14 octobre 2026"],
         ["T20", "Affichage sur téléphone", "Téléphone ou émulation", "Parcourir les pages principales", "Mise en page utilisable", "Non rejoué lors de cette revue", "Résultat non consigné pour ce scénario", "Classes Tailwind responsive"],
     ]
@@ -501,7 +501,7 @@ def contenu():
     # ----- Annexes
     o.append(sec("Annexes", "annexes"))
     o.append(h3("Annexe A — Tables créées par les migrations du dépôt"))
-    o.append(p(f"Le tableau suivant liste les {len(CREATED)} tables dont la création figure dans un fichier de migration versionné, avec la date de la migration (au format année, mois, jour). Les autres tables du schéma déployé existaient avant la première migration versionnée."))
+    o.append(p(f"Le tableau suivant liste les {len(CREATED)} tables dont la création figure dans un fichier de migration versionné, avec la date de la migration (au format année, mois, jour). La différence avec le schéma déployé reflète les migrations appliquées qui ne sont pas toutes présentes comme fichiers dans ce dépôt ; les fichiers versionnés ne suffisent donc pas, à eux seuls, à reconstruire tout le schéma."))
     rows = [[f"<code>{t}</code>", d[:4] + "-" + d[4:6] + "-" + d[6:8]] for t, d in CREATED.items()]
     half = (len(rows) + 1) // 2
     comb = []
