@@ -1,7 +1,7 @@
 # Rapport de vérification
 
 ## Sources examinées
-Dépôt `darlyblake/Syst-me-Administratif-Scolaire` (main, cloné en lecture seule) : README, docs/, IMPLEMENTATION-ECOLE.md, POINTAGE-IMPLEMENTATION.md, PARENT-TODO.md, TODO.md, AUDIT_SETTINGS.md, code (app, hooks, services, lib, providers, components/auth), 85 migrations, 5 fonctions Edge, package.json, next.config.js, vercel.json, capacitor.config.ts, historique git. Adresse déployée : une requête le 14/10/2026.
+Dépôt `darlyblake/Syst-me-Administratif-Scolaire` (main, cloné en lecture seule) : README, docs/, IMPLEMENTATION-ECOLE.md, POINTAGE-IMPLEMENTATION.md, PARENT-TODO.md, TODO.md, AUDIT_SETTINGS.md, code (app, hooks, services, lib, providers, components/auth), 91 migrations, 5 fonctions Edge, package.json, next.config.js, vercel.json, capacitor.config.ts, historique git. Adresse déployée : une requête le 14/10/2026.
 
 ## Tests réellement exécutés
 - Aucun test Jest : `npm ci`, `npm install` et `pnpm install --frozen-lockfile` ont échoué (lockfile désynchronisé ; bug npm). `jest` et `electron` ne sont pas déclarés dans package.json.
@@ -9,7 +9,7 @@ Dépôt `darlyblake/Syst-me-Administratif-Scolaire` (main, cloné en lecture seu
 - Seul constat : l'URL déployée renvoie la page d'accueil « NOVA ».
 
 ## État par module (analyse statique)
-Voir tableau « État des fonctionnalités » du dossier. Pointage : backend durci, interface présente, vérifications non cochées → Partielle. Espace parent : nombreux points non cochés → Partielle. Source de données : 71 pages Supabase, 13 locales, 7 mixtes, 34 sans référence directe (heuristique).
+Voir tableau « État des fonctionnalités » du dossier. Pointage : backend durci, interface présente, vérifications non cochées → Partielle. Espace parent : nombreux points non cochés → Partielle. La répartition par références directes est une heuristique qui peut devenir obsolète au fil des commits. Ne pas reprendre les anciens nombres de pages locales sans refaire l'analyse de la version exacte examinée.
 
 ## Points non vérifiables
 Issues et déploiements GitHub (API inaccessible) ; correspondance entre version en ligne et HEAD ; contenu réel de la base (87 tables, RLS, définition active de `has_permission`) ; fonctions Edge non versionnées (get-parent-children, manage-teacher-account, approve-establishment-request) ; comportement hors ligne ; affichage sur téléphone.
