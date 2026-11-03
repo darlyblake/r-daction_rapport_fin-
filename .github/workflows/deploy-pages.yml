@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'Dossier_projet_gestion_administrative_scolaire_FINAL.html'
+      - 'Projet_fin_licence_UNG_version_HTML_corrige.html'
+      - 'assets/embedded/**'
       - 'captures/**'
       - 'diagrammes/exports/**'
       - '.github/workflows/deploy-pages.yml'
@@ -31,9 +32,10 @@ jobs:
 
       - name: Préparer le site statique
         run: |
-          mkdir -p site/captures site/diagrammes
-          cp Dossier_projet_gestion_administrative_scolaire_FINAL.html site/index.html
+          mkdir -p site/captures site/diagrammes site/assets/embedded
+          cp Projet_fin_licence_UNG_version_HTML_corrige.html site/index.html
           cp -R captures/. site/captures/
+          cp -R assets/embedded/. site/assets/embedded/
           cp -R diagrammes/exports site/diagrammes/exports
           touch site/.nojekyll
 
@@ -42,6 +44,7 @@ jobs:
           test -s site/index.html
           test -d site/captures
           test -d site/diagrammes/exports
+          test -d site/assets/embedded
           echo "Rapport HTML et dossiers de ressources prêts pour publication."
 
       - name: Créer l'artefact Pages
